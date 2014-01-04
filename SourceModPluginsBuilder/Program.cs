@@ -91,6 +91,7 @@ namespace SourceModPluginsBuilder
                     Console.WriteLine("game path " + gamePath + " not found!");
                 }
             }
+            Console.WriteLine("Complited!");
         }
 
         private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
