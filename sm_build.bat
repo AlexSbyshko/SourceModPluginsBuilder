@@ -7,7 +7,6 @@ SET SOURCEPAWN_COMPILER_DIRECTORY=%CD%
 
 IF EXIST compiler_directory.txt FOR /F %%i IN (compiler_directory.txt) DO SET SOURCEPAWN_COMPILER_DIRECTORY=%%i
 IF EXIST plugin_directory.txt FOR /F %%i IN (plugin_directory.txt) DO SET PLUGIN_DIRECTORY=%%i
-IF EXIST game_directory.txt FOR /F %%i IN (game_directory.txt) DO SET GAME_DIRECTORY=%%i
 
 SET BUILD_DIRECTORY=%PLUGIN_DIRECTORY%\build
 SET SOURCEMOD_DIRECTORY=%BUILD_DIRECTORY%\addons\sourcemod
@@ -22,9 +21,9 @@ SET PLUGINS_DIRECTORY=%SOURCEMOD_DIRECTORY%\plugins
 IF NOT EXIST %PLUGINS_DIRECTORY% MKDIR %PLUGINS_DIRECTORY%
 MOVE /Y %PLUGIN_NAME%.smx %PLUGINS_DIRECTORY%
 
-IF DEFINED GAME_DIRECTORY (
-	ECHO Copying build into %GAME_DIRECTORY%
-	XCOPY /Y /S /Q /D %BUILD_DIRECTORY% %GAME_DIRECTORY%
+IF EXIST game_directory.txt FOR /F %%i IN (game_directory.txt) DO (
+	ECHO Copying build into %%i
+	XCOPY /Y /S /Q /D %BUILD_DIRECTORY% %%i
 )
 
 PAUSE
